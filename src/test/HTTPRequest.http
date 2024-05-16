@@ -1,0 +1,33 @@
+### Listar todos os videos
+GET{{apiUrl}}/videos
+Accept: application/json
+
+### Listar um video
+GET http://localhost:8080/videos/2
+Accept: application/json
+
+### Inserindo um novo video
+POST http://localhost:8080/videos
+Content-Type: application/json
+
+{
+  "nome": "Titulo do video",
+  "descricao": "Descricao do video",
+  "url": "http://www.youtube.com"
+}
+
+### Deletando um video
+DELETE http://localhost:8080/videos/1
+Accept: application/json
+
+### Atualizando um video
+PUT http://localhost:8080/videos/2
+Content-Type: application/json
+
+{
+  "nome": "Titulo do video",
+  "descricao": "Descricao do video",
+  "url": "http://www.youtube.com"
+}
+
+
