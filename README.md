@@ -4,9 +4,9 @@ Este é um projeto desenvolvido para o Alura Challenge Backend. O projeto consis
 
 ## Tecnologias Utilizadas
 
-- Java
-- Spring Boot
-- SQL
+- Java 17
+- Spring Boot 3.2
+- PostgreSQL
 - Maven
 
 ## Estrutura do Projeto
