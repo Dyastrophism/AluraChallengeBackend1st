@@ -13,7 +13,7 @@ Content-Type: application/json
 {
   "nome": "Titulo do video",
   "descricao": "Descricao do video",
-  "url": "http://www.youtube.com"
+  "url": "www.youtube.com"
 }
 
 ### Deletando um video
@@ -31,3 +31,32 @@ Content-Type: application/json
 }
 
 
+### Listar todas as categorias
+GET http://localhost:8080/categorias
+Accept: application/json
+
+### Listar uma categoria
+GET http://localhost:8080/categorias/2
+Accept: application/json
+
+### Inserindo uma nova categoria
+POST http://localhost:8080/categorias
+Content-Type: application/json
+
+{
+  "titulo": "Nome da categoria",
+  "cor": "#000000"
+}
+
+### Deletando uma categoria
+DELETE http://localhost:8080/categorias/4
+Accept: application/json
+
+### Atualizando uma categoria
+PUT http://localhost:8080/categorias/2
+Content-Type: application/json
+
+{
+  "titulo": "Nome da categoria",
+  "cor": "#000000"
+}

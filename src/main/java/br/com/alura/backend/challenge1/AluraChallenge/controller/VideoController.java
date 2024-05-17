@@ -1,13 +1,14 @@
 package br.com.alura.backend.challenge1.AluraChallenge.controller;
 
-import br.com.alura.backend.challenge1.AluraChallenge.dto.DadosVideosDTO;
+import br.com.alura.backend.challenge1.AluraChallenge.dto.video.DadosVideoResponseDTO;
+import br.com.alura.backend.challenge1.AluraChallenge.dto.video.DadosVideosDTO;
 import br.com.alura.backend.challenge1.AluraChallenge.service.VideoService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,7 +26,7 @@ public class VideoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DadosVideosDTO>> listarVideos(Pageable pageable) {
+    public ResponseEntity<Page<DadosVideosDTO>> listarVideos(@PageableDefault(sort = {"nome"}) Pageable pageable) {
         try {
             var videos = videoService.listarVideos(pageable);
             return ResponseEntity.ok(videos);
@@ -45,18 +46,16 @@ public class VideoController {
     }
 
     @PostMapping
-    @Transactional
-    public ResponseEntity<DadosVideosDTO> salvarVideo(@RequestBody @Valid DadosVideosDTO dadosVideosDTO, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<DadosVideoResponseDTO> salvarVideo(@RequestBody @Valid DadosVideosDTO dadosVideosDTO, UriComponentsBuilder uriComponentsBuilder) {
         try {
-            DadosVideosDTO videoSalvo = videoService.salvarVideo(dadosVideosDTO);
-            return ResponseEntity.created(uriComponentsBuilder.path("/videos/{id}").buildAndExpand(videoSalvo).toUri()).body(videoSalvo);
+            DadosVideoResponseDTO videoSalvo = videoService.salvarVideo(dadosVideosDTO);
+            return ResponseEntity.created(uriComponentsBuilder.path("/videos/{id}").buildAndExpand(videoSalvo.id()).toUri()).body(videoSalvo);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    @Transactional
     public ResponseEntity<Optional<DadosVideosDTO>> atualizarVideo(@PathVariable Long id, @RequestBody DadosVideosDTO dadosVideosDTO) {
         try {
             Optional<DadosVideosDTO> videoSalvo = videoService.atualizarVideo(id, dadosVideosDTO);
