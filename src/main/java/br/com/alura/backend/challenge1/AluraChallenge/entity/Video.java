@@ -1,10 +1,7 @@
 package br.com.alura.backend.challenge1.AluraChallenge.entity;
 
-import br.com.alura.backend.challenge1.AluraChallenge.dto.DadosVideosDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import br.com.alura.backend.challenge1.AluraChallenge.dto.video.DadosVideosDTO;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +16,14 @@ public class Video {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private String descricao;
+
+    @Column(nullable = false)
     private String url;
 
     public Video(DadosVideosDTO dadosVideosDTO) {
